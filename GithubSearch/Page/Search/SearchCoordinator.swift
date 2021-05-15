@@ -29,6 +29,6 @@ extension SearchCoordinator: SearchViewControllerDelegate {
     }
 
     func searchViewController(_ vc: SearchViewController, didSelectRepository link: URL) {
-        navigateToRepository(link, animated: true)
+        navigateToRepositoryWebPage(link, animated: true)
     }
 }

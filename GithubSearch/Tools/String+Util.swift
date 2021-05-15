@@ -26,7 +26,7 @@ extension String {
         return nil
     }
 
-    enum TodayStringError: Error {
+    enum StringError: Error {
         case encodingFail
     }
 
@@ -41,7 +41,7 @@ extension String {
         let html = "<!DOCTYPE html><head><style>\(styleString)</style></head><body>\(self)</body></html>"
 
         guard let data = html.data(using: String.Encoding.utf8) else {
-            throw TodayStringError.encodingFail
+            throw StringError.encodingFail
         }
 
         return try NSAttributedString(

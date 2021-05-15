@@ -8,7 +8,8 @@
 import UIKit
 import WebKit
 
-class SimpleWebViewController: BaseWebViewController {
+class SimpleWebViewController: BaseWebViewController, NoNetworkDisplayable {
+    var noNetworkView: NoNetworkView?
 
     lazy var viewModel = SimpleWebViewModel()
 
@@ -19,12 +20,22 @@ class SimpleWebViewController: BaseWebViewController {
         edgesForExtendedLayout = []
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        viewModel.networkStateDidChange = { [weak self] reachable in
+            guard let `self` = self else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                if reachable == true {
+                    self.removeNoNetworkView()
+                } else {
+                    self.showNoNetworkView()
+                }
+            }
+        }
 
         loadStartingURL()
     }
@@ -41,9 +52,20 @@ class SimpleWebViewController: BaseWebViewController {
     func reload() {
         if webView.url != nil {
             webView.reload()
+            viewModel.reload()
         } else {
             loadStartingURL()
         }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+extension SimpleWebViewController: NoNetworkViewDelegate {
+    func noNetworkViewDidTapRetry(_ noNetworkView: NoNetworkView) {
+        reload()
     }
 }
 
@@ -52,6 +74,7 @@ class SimpleWebViewController: BaseWebViewController {
 extension SimpleWebViewController {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = navigationAction.request.url else {
+            Logger.log("nil url from link", level: .error)
             decisionHandler(.cancel)
             return
         }

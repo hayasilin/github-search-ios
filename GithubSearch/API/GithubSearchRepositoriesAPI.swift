@@ -8,6 +8,13 @@
 import Foundation
 
 // https://docs.github.com/en/rest/reference/search#search-repositories
+// URL Example
+// https://api.github.com/search/repositories?sort=stars&order=desc&per_page=10&page=1&q=user:hayasilin
+// Query Example
+// q=name:swift
+// q=user:hayasilin
+// q=language:Swift
+// q=language:Swift+language:RXSwift
 class GithubSearchRepositoriesAPI: NetworkRequest, GithubAPI {
     struct RequestParameter {
         let query: String
@@ -44,7 +51,7 @@ class GithubSearchRepositoriesAPI: NetworkRequest, GithubAPI {
     struct ResponseType: Codable {
         let totalCount: Int?
         let inCompleteResults: Bool?
-        let items: [RepositoryItem]
+        let items: [GithubRepositoryItem]
 
         enum CodingKeys: String, CodingKey {
             case totalCount = "total_count"

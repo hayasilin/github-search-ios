@@ -20,27 +20,28 @@ struct NetworkClient: NetworkClientType {
         completion: @escaping (Data?, Error?) -> Void
     ) {
         let apiClient = ApiClient.shared
-        guard let url = URL(string: networkRequest.url) else { return }
+        guard let url = URL(string: networkRequest.url) else {
+            return
+        }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = networkRequest.method.rawValue
         urlRequest.allHTTPHeaderFields = networkRequest.headers
 
-        if !networkRequest.params.isEmpty {
-            switch networkRequest.method {
-            case .get:
-                if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) {
-                    var queryItems = [URLQueryItem]()
-                    for (key, value) in networkRequest.params {
-                        let queryItem = URLQueryItem(name: key, value: "\(value)")
-                        queryItems.append(queryItem)
-                    }
-                    urlComponents.queryItems = queryItems
-                    urlRequest.url = urlComponents.url
+        switch networkRequest.method {
+        case .get:
+            if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+               !networkRequest.params.isEmpty {
+                var queryItems = [URLQueryItem]()
+                for (key, value) in networkRequest.params {
+                    let queryItem = URLQueryItem(name: key, value: "\(value)")
+                    queryItems.append(queryItem)
                 }
-            case .post, .put, .delete:
-                if let data = try? JSONSerialization.data(withJSONObject: networkRequest.params, options: []) {
-                    urlRequest.httpBody = data
-                }
+                urlComponents.queryItems = queryItems
+                urlRequest.url = urlComponents.url
+            }
+        case .post, .put, .delete:
+            if let data = try? JSONSerialization.data(withJSONObject: networkRequest.params, options: []) {
+                urlRequest.httpBody = data
             }
         }
 

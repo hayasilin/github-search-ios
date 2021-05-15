@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 protocol GithubNavigable {
-    func navigateToRepository(_ url: URL, animated: Bool)
+    func navigateToRepositoryWebPage(_ url: URL, animated: Bool)
 
     var navigationController: UINavigationController { get }
 }
 
 extension GithubNavigable {
-    func navigateToRepository(_ url: URL, animated: Bool) {
+    func navigateToRepositoryWebPage(_ url: URL, animated: Bool) {
         let viewModel = SimpleWebViewModel(url: url, title: url.absoluteString)
         let webVC = SimpleWebViewController(viewModel: viewModel)
         navigationController.pushViewController(webVC, animated: true)

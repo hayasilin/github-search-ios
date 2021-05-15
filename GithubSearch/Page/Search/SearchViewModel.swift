@@ -9,6 +9,3 @@ import UIKit
 
 class SearchViewModel {
 }
-
-extension SearchViewModel {
-}

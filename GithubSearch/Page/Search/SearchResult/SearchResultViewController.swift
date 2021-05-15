@@ -12,17 +12,21 @@ protocol SearchResultViewControllerDelegate: AnyObject {
 }
 
 class SearchResultViewController: UIViewController, LoadingIndicatorDisplayable {
-    var spinner: UIActivityIndicatorView?
-
-    weak var delegate: SearchResultViewControllerDelegate?
-
-    lazy var viewModel = SearchResultViewModel()
+    init(viewModel: SearchResultViewModel, delegate: SearchResultViewControllerDelegate?) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+        self.delegate = delegate
+    }
 
     fileprivate enum Constants {
         static let noImageCell = "SearchResultNoImageTableViewCell"
         static let imageCell = "SearchResultWithImageTableViewCell"
         static let header = "header"
     }
+
+    weak var delegate: SearchResultViewControllerDelegate?
+
+    lazy var viewModel = SearchResultViewModel()
 
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -48,20 +52,13 @@ class SearchResultViewController: UIViewController, LoadingIndicatorDisplayable 
     }()
 
     // NoNetworkDisplayable
-//    var noNetworkView: NoNetworkView?
+    var noNetworkView: NoNetworkView?
+
+    // LoadingIndicatorDisplayable
+    var spinner: UIActivityIndicatorView?
 
     // EmptyDisplayable
     var emptyView: EmptyView?
-
-    init(viewModel: SearchResultViewModel, delegate: SearchResultViewControllerDelegate?) {
-        super.init(nibName: nil, bundle: nil)
-        self.viewModel = viewModel
-        self.delegate = delegate
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,14 +71,21 @@ class SearchResultViewController: UIViewController, LoadingIndicatorDisplayable 
         binding()
 
         viewModel.request()
+
+        showLoadingIndicator()
     }
 
     private func binding() {
         viewModel.searchResultRepositoryListDidChange = { [weak self] in
             DispatchQueue.main.async {
+                self?.removeLoadingIndicator()
                 self?.tableView.reloadData()
             }
         }
+    }
+
+    required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -153,11 +157,11 @@ extension SearchResultViewController: SearchResultHeaderViewDelegate {
     }
 }
 
-//extension SearchResultViewController: NoNetworkDisplayable, NoNetworkViewDelegate {
-//    func noNetworkViewDidTapRetry(_ noNetworkView: NoNetworkView) {
-//        viewModel.request()
-//    }
-//}
+extension SearchResultViewController: NoNetworkDisplayable, NoNetworkViewDelegate {
+    func noNetworkViewDidTapRetry(_ noNetworkView: NoNetworkView) {
+        viewModel.request()
+    }
+}
 
 extension SearchResultViewController {
     func showLoadMoreSpinner() {

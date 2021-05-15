@@ -8,14 +8,15 @@
 import Foundation
 
 protocol NetworkRequest {
+    // Required
     var baseUrl: String { get }
     var endpoint: String { get }
 
+    // Optional
     var method: HTTPMethod { get }
     var params: [String: Any] { get }
     var defaultHeaders: [String: String] { get }
     var customHeaders: [String: String] { get }
-
     var networkClient: NetworkClientType { get }
 }
 

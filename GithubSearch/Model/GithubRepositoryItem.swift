@@ -7,9 +7,7 @@
 
 import Foundation
 
-// Example
-// https://api.github.com/search/repositories?sort=stars&order=desc&per_page=10&page=1&q=user:hayasilin
-public struct RepositoryItem : Codable {
+public struct GithubRepositoryItem : Codable {
     public let id : Int?
     public let nodeId: String?
     public let name : String?

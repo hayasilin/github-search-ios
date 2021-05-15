@@ -17,6 +17,7 @@ extension LoadingIndicatorDisplayable where Self: UIViewController {
     func showLoadingIndicator(delay: TimeInterval = 0) {
         if spinner == nil {
             let activityIndicatorView = UIActivityIndicatorView(style: .medium)
+            activityIndicatorView.color = .darkGray
             view.addSubview(activityIndicatorView)
             activityIndicatorView.fixInSuperviewCenter()
 

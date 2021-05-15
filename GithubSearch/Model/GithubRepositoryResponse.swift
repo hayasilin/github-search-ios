@@ -10,7 +10,7 @@ import Foundation
 class GithubRepositoryResponse: Codable {
     let totalCount: Int?
     let inCompleteResults: Bool?
-    let items: [RepositoryItem]
+    let items: [GithubRepositoryItem]
 
     enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"

@@ -27,12 +27,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.rightBarButtonItems = [searchBarButtonItem]
+
+        showSearchPage()
     }
 
     @objc func searchButtonTapped(_ sender: UIButton) {
+        showSearchPage()
+    }
+
+    private func showSearchPage() {
         let searchCoordinator = SearchCoordinator(delegate: self)
         self.searchCoordinator = searchCoordinator
         let searchNavigationController = searchCoordinator.navigationController
+        searchNavigationController.modalPresentationStyle = .fullScreen
         navigationController?.present(searchNavigationController, animated: true, completion: nil)
     }
 }

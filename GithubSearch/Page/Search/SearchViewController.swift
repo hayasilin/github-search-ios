@@ -27,6 +27,8 @@ class SearchViewController: UIViewController, Displayable {
 
     weak var searchResultViewController: SearchResultViewController?
 
+    var searchTermViewController: SearchTermViewController?
+
     lazy var viewModel = SearchViewModel()
 
     lazy var searchBar: UISearchBar = {
@@ -48,6 +50,16 @@ class SearchViewController: UIViewController, Displayable {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+
+        let searchTermVC = SearchTermViewController()
+        searchTermVC.userDidClick = { [weak self] searchTerm in
+            guard let self = self else { return }
+            self.searchBar.text = searchTerm
+            self.search(searchTerm: searchTerm)
+        }
+        display(searchTermVC, under: self)
+        searchTermVC.view.pinEdgesToSuperviewEdges()
+        searchTermViewController = searchTermVC
 
         setNavigationTitleView()
         searchBar.delegate = self
@@ -82,6 +94,8 @@ class SearchViewController: UIViewController, Displayable {
         display(vc, under: self)
         vc.view.pinEdgesToSuperviewEdges()
         searchResultViewController = vc
+
+        searchTermViewController?.add(searchTerm: searchTerm)
     }
 
     @objc func cancelButtonTapped() {

@@ -30,7 +30,7 @@ enum ContentType {
     var headerField: String {
         switch self {
         case .none: return ""
-        case .formUrlEncoded: return ""
+        case .formUrlEncoded: return "Content-Type"
         case .json: return "Content-Type"
         }
     }
