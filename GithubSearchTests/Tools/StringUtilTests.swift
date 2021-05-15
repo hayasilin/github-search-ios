@@ -34,4 +34,9 @@ class StringUtilTests: XCTestCase {
         // Then
         XCTAssertNil(subString)
     }
+
+    func testBase64Encoded() {
+        let base64String = "githubsearch".base64Encoded()
+        XCTAssertEqual("Z2l0aHVic2VhcmNo", base64String)
+    }
 }
