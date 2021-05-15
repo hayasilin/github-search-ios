@@ -30,6 +30,8 @@ class ApiClient {
     static let shared = ApiClient()
     lazy var session: SessionProtocol = {
         let condig = URLSessionConfiguration.default
+        condig.timeoutIntervalForRequest = 30.0
+        condig.timeoutIntervalForResource = 60.0
         condig.requestCachePolicy = .returnCacheDataElseLoad
         let cache = URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024)
         condig.urlCache = cache

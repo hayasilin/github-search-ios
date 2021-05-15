@@ -42,6 +42,8 @@ class SearchTermTableViewCell: UITableViewCell {
     func setupView() {
         backgroundColor = .white
 
+        selectionStyle = .none
+
         addSubview(title)
         addSubview(deleteButton)
 

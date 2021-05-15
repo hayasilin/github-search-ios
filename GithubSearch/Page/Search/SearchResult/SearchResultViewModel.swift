@@ -54,7 +54,7 @@ class SearchResultViewModel {
     private var offset = 1
 
     init(searchTerm: String = "") {
-        self.searchTerm = "name:" + searchTerm
+        self.searchTerm = searchTerm + "+in:name"
     }
 
     func numberOfSections() -> Int {
