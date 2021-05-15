@@ -13,6 +13,6 @@ class RepositoryOwnerTests: XCTestCase {
         let data = (try APITests.testDataFromJSON(fileName: "RepositoryOwnerSuccess"))!
         let result = try JSONDecoder().decode(RepositoryOwner.self, from: data)
 
-        XCTAssertEqual(result.avatarUrl, "https://avatars.githubusercontent.com/u/1012467?v=4")
+        XCTAssertEqual("https://avatars.githubusercontent.com/u/1012467?v=4", result.avatarUrl)
     }
 }

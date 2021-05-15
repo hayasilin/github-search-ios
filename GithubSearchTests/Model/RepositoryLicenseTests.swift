@@ -13,6 +13,6 @@ class RepositoryLicenseTests: XCTestCase {
         let data = (try APITests.testDataFromJSON(fileName: "RepositoryLicenseSuccess"))!
         let result = try JSONDecoder().decode(RepositoryLicense.self, from: data)
 
-        XCTAssertEqual(result.name, "MIT License")
+        XCTAssertEqual("MIT License", result.name)
     }
 }
