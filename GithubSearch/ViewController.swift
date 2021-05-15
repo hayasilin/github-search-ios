@@ -15,6 +15,7 @@ class ViewController: UIViewController {
         let searchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         searchButton.setImage(UIImage(named: "icSearch"), for: .normal)
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        searchButton.accessibilityIdentifier = UITestIdentifierConfig.searchButton.rawValue
         return searchButton
     }()
 

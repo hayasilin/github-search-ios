@@ -47,7 +47,7 @@ class SearchResultViewController: UIViewController, LoadingIndicatorDisplayable 
             SearchResultHeaderView.self,
             withIdentifier: Constants.header
         )
-
+        tableView.accessibilityIdentifier = UITestIdentifierConfig.searchResultTableView.rawValue
         return tableView
     }()
 

@@ -79,7 +79,7 @@ class SearchViewController: UIViewController, Displayable {
     }
 
     fileprivate var maxSearchTermLength: Int {
-        return 500
+        return viewModel.maxSearchTermLength()
     }
 
     func search(searchTerm: String) {

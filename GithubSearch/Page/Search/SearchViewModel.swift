@@ -8,4 +8,7 @@
 import UIKit
 
 class SearchViewModel {
+    func maxSearchTermLength() -> Int {
+        return 500
+    }
 }

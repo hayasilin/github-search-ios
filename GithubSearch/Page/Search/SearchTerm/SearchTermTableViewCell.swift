@@ -21,7 +21,7 @@ class SearchTermTableViewCell: UITableViewCell {
         deleteButton.extraTouchAreaInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         deleteButton.setImage(UIImage(named: "icDelete"), for: .normal)
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-
+        deleteButton.accessibilityIdentifier = UITestIdentifierConfig.searchTermDeleteButton.rawValue
         return deleteButton
     }()
 

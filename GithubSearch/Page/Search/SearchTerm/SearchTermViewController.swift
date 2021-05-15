@@ -20,7 +20,7 @@ class SearchTermViewController: UIViewController, EmptyDisplayable {
         tableView.keyboardDismissMode = .onDrag
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 7, right: 0)
         tableView.registerReusableCellClass(SearchTermTableViewCell.self)
-
+        tableView.accessibilityIdentifier = UITestIdentifierConfig.searchTermTableView.rawValue
         return tableView
     }()
 
