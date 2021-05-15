@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct RepositoryOwner : Codable {
+public struct RepositoryOwner: Codable {
     public let login : String?
     public let id : Int?
     public let nodeId: String?

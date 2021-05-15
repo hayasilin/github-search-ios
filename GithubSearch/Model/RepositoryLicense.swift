@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct RepositoryLicense : Codable {
+public struct RepositoryLicense: Codable {
     public let key : String?
     public let name : String?
     public let spdxId : String?

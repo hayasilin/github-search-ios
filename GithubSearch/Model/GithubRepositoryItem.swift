@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct GithubRepositoryItem : Codable {
+public struct GithubRepositoryItem: Codable {
     public let id : Int?
     public let nodeId: String?
     public let name : String?
