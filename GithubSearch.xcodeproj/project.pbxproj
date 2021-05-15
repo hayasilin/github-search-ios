@@ -111,7 +111,6 @@
 		6501DCFF264FD3E200ACD78D /* NoNetworkDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkDisplayable.swift; sourceTree = "<group>"; };
 		6501DD01264FD4CF00ACD78D /* EmptyDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDisplayable.swift; sourceTree = "<group>"; };
 		6501DD03264FD6A300ACD78D /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
-		6501DD05264FD83000ACD78D /* GithubSearch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GithubSearch-Bridging-Header.h"; sourceTree = "<group>"; };
 		6501DD06264FE1F200ACD78D /* DBManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerTests.swift; sourceTree = "<group>"; };
 		6501DD08264FE26500ACD78D /* StringUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtilTests.swift; sourceTree = "<group>"; };
 		6501DD0A264FE33300ACD78D /* SearchTermViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTermViewModelTests.swift; sourceTree = "<group>"; };
@@ -325,7 +324,6 @@
 		659FFA05264EB0C00063B962 /* GithubSearch */ = {
 			isa = PBXGroup;
 			children = (
-				6501DD05264FD83000ACD78D /* GithubSearch-Bridging-Header.h */,
 				659FFA14264EB0C30063B962 /* Info.plist */,
 				659FFA06264EB0C00063B962 /* AppDelegate.swift */,
 				659FFA63264F6AE70063B962 /* Displayable.swift */,
