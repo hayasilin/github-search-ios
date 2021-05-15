@@ -44,8 +44,8 @@ class SearchTermTableViewCell: UITableViewCell {
 
         selectionStyle = .none
 
-        addSubview(title)
-        addSubview(deleteButton)
+        contentView.addSubview(title)
+        contentView.addSubview(deleteButton)
 
         title.translatesAutoresizingMaskIntoConstraints = false
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
