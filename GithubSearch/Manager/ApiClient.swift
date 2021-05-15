@@ -28,7 +28,13 @@ extension URLSession: SessionProtocol {}
 
 class ApiClient {
     static let shared = ApiClient()
-    lazy var session: SessionProtocol = URLSession.shared
+    lazy var session: SessionProtocol = {
+        let condig = URLSessionConfiguration.default
+        condig.requestCachePolicy = .returnCacheDataElseLoad
+        let cache = URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024)
+        condig.urlCache = cache
+        return URLSession(configuration: condig)
+    }()
 
     func requestData(_ urlRequest: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let dataTask = session.dataTask(with: urlRequest, completionHandler: completionHandler)

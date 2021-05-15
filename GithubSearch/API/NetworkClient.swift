@@ -23,7 +23,7 @@ struct NetworkClient: NetworkClientType {
         guard let url = URL(string: networkRequest.url) else {
             return
         }
-        var urlRequest = URLRequest(url: url)
+        var urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
         urlRequest.httpMethod = networkRequest.method.rawValue
         urlRequest.allHTTPHeaderFields = networkRequest.headers
 
