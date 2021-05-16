@@ -31,12 +31,10 @@ struct NetworkClient: NetworkClientType {
         case .get:
             if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
                !networkRequest.params.isEmpty {
-                var queryItems = [URLQueryItem]()
-                for (key, value) in networkRequest.params {
-                    let queryItem = URLQueryItem(name: key, value: "\(value)")
-                    queryItems.append(queryItem)
+
+                urlComponents.queryItems = networkRequest.params.map {
+                    URLQueryItem(name: $0.key, value: "\($0.value)")
                 }
-                urlComponents.queryItems = queryItems
                 urlRequest.url = urlComponents.url
             }
         case .post, .put, .delete:
