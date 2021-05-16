@@ -2,7 +2,7 @@
 
 - This is a demo project of using GitHub API to make a iOS app contains functions listed below:
   - Implement incremental search
-  - Use URLSession to fulfill API request
+  - Use pure URLSession to fulfill API request
   - Implement API request throttling
 
 - Githu API used by the project:
