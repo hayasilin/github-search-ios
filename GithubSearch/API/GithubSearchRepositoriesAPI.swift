@@ -9,12 +9,12 @@ import Foundation
 
 // https://docs.github.com/en/rest/reference/search#search-repositories
 // URL Example
-// https://api.github.com/search/repositories?sort=stars&order=desc&per_page=10&page=1&q=user:hayasilin
+// https://api.github.com/search/repositories?sort=stars&order=desc&per_page=10&page=1&q=swift+in:name
 // Query Example
-// q=name:swift
+// q=swift+in:name
 // q=user:hayasilin
 // q=language:Swift
-// q=language:Swift+language:RXSwift
+// q=language:Swift+language:Ruby
 class GithubSearchRepositoriesAPI: NetworkRequest, GithubAPI {
     struct RequestParameter {
         let query: String
