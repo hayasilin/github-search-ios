@@ -9,7 +9,7 @@
   - https://docs.github.com/en/rest/reference/search
   - https://docs.github.com/en/rest/reference/search#search-repositories
 
-- The project is developed in Xcode 12.5 and latest Swift 5.2, please **use Xcode 12.5** to build and run the project.
+- The project is developed in **Xcode 12.5** and **latest Swift 5**, please **use Xcode 12.5** to build and run the project.
 
 ## Code coverage result
 
