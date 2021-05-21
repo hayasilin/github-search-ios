@@ -8,6 +8,7 @@
 import Foundation
 
 // https://docs.github.com/en/rest/reference/search#search-repositories
+// https://docs.github.com/en/rest/reference/search#rate-limit
 // URL Example
 // https://api.github.com/search/repositories?sort=stars&order=desc&per_page=10&page=1&q=swift+in:name
 // Query Example
