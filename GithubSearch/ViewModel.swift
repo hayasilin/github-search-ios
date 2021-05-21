@@ -18,6 +18,8 @@ class ViewModel {
 
     private var dataMaxCount: Int?
     private lazy var repositoryItems: [GithubRepositoryItem] = []
+    private lazy var titleDict: [String: NSAttributedString] = [:]
+    private lazy var detailDict: [String: NSAttributedString] = [:]
 
     private var isLoading = false
 
@@ -45,6 +47,7 @@ class ViewModel {
 
         GithubSearchRepositoriesAPI(requestParameter: requestParameter).request { response in
             self.dataMaxCount = response.totalCount
+            self.convertAttributedStrings(articles: response.items)
             self.repositoryItems = response.items
             self.searchResultRepositoryListDidChange?()
         } failure: { error in
@@ -88,6 +91,7 @@ class ViewModel {
         GithubSearchRepositoriesAPI(requestParameter: requestParameter).request { response in
             self.isLoading = false
             self.dataMaxCount = response.totalCount
+            self.convertAttributedStrings(articles: response.items)
             self.repositoryItems.append(contentsOf: response.items)
             self.searchResultRepositoryListDidChange?()
         } failure: { error in
@@ -101,11 +105,43 @@ class ViewModel {
         }
         return dataMaxCount > repositoryItems.count
     }
+
+    private func convertAttributedStrings(articles: [GithubRepositoryItem]) {
+        articles.forEach {
+            if let name = $0.name, let description = $0.descriptionField {
+                self.titleDict[name] = try? name.htmlAttributedString(fontSize: 14, r: 0, g: 0, b: 0)
+                self.detailDict[description] = try? description.htmlAttributedString(fontSize: 14, r: 134, g: 134, b: 134)
+            }
+        }
+    }
 }
 
 extension ViewModel {
     func repositoryItem(at indexPath: IndexPath) -> GithubRepositoryItem? {
         return repositoryItems[safe: indexPath.row]
+    }
+
+    func thumbnailURL(of repositoryItem: GithubRepositoryItem) -> URL? {
+        guard let avatarUrl = repositoryItem.owner?.avatarUrl else {
+            return nil
+        }
+        return URL(string: avatarUrl)
+    }
+
+    func title(of repositoryItem: GithubRepositoryItem) -> NSAttributedString? {
+        return titleDict[repositoryItem.name ?? ""]
+    }
+
+    func detailText(of repositoryItem: GithubRepositoryItem) -> NSAttributedString? {
+        return detailDict[repositoryItem.descriptionField ?? ""]
+    }
+
+    func contentProvider(of repositoryItem: GithubRepositoryItem) -> String? {
+        return repositoryItem.fullName
+    }
+
+    func dateString(of repositoryItem: GithubRepositoryItem) -> String? {
+        return "\(repositoryItem.id ?? 0)"
     }
 
     func repositoryURL(at indexPath: IndexPath) -> URL? {

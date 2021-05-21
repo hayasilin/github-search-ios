@@ -8,14 +8,25 @@
 import UIKit
 
 class ViewController: UIViewController {
+    fileprivate enum Constants {
+        static let noImageCell = "SearchResultNoImageTableViewCell"
+        static let imageCell = "SearchResultWithImageTableViewCell"
+    }
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 60
+        tableView.estimatedRowHeight = 160
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.registerReusableCellClass(UITableViewCell.self)
+        tableView.register(
+            UINib(nibName: Constants.imageCell, bundle: nil),
+            forCellReuseIdentifier: Constants.imageCell
+        )
+        tableView.register(
+            UINib(nibName: Constants.noImageCell, bundle: nil),
+            forCellReuseIdentifier: Constants.noImageCell
+        )
         return tableView
     }()
 
@@ -93,12 +104,19 @@ extension ViewController: UITableViewDataSource {
         guard let repository = viewModel.repositoryItem(at: indexPath) else {
             return UITableViewCell()
         }
-        
-        let cell = tableView.shortDequeueCell(for: indexPath)
-        let displayText = "\(repository.name ?? "")" + "\n" + "⭐️ \(repository.stargazersCount ?? 0)"
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = displayText
 
+        let thumbnailURL = viewModel.thumbnailURL(of: repository)
+
+        let cellIdentifier = (thumbnailURL != nil)
+            ? Constants.imageCell
+            : Constants.noImageCell
+
+        let cell: SearchResultTableViewCell = tableView.shortDequeueCell(withIdentifier: cellIdentifier, for: indexPath)
+        cell.titleLabel.attributedText = viewModel.title(of: repository)
+        cell.detailLabel.attributedText = viewModel.detailText(of: repository)
+        cell.contentProviderLabel.text = viewModel.contentProvider(of: repository)
+        cell.dateLabel.text = viewModel.dateString(of: repository)
+        cell.setupImage(with: thumbnailURL)
         return cell
     }
 }
