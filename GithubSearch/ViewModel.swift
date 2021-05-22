@@ -27,7 +27,7 @@ class ViewModel {
 
     private var searchTerm = ""
 
-    private(set) var searchTermThrottle = Throttler<String>(1.5)
+    private(set) var searchTermThrottle = ThrottleDebouncer<String>(1.5)
 
     init() {
         binding()
