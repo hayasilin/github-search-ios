@@ -4,6 +4,7 @@
   - Implement incremental search
   - Use pure URLSession to fulfill API request
   - Implement API request throttling
+  - Use Operation to hanle network image without using third party libries
 
 - Githu API used by the project:
   - https://docs.github.com/en/rest/reference/search
