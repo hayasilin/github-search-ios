@@ -13,7 +13,7 @@
 
 ## Code coverage result
 
-This project also implement both unit tests and UI tests, and the code coverage for the main app code is **70.1%**
+This project also implement both unit tests and UI tests, and the code coverage for the main app code is **73.0%**
 
 <img src="https://github.com/hayasilin/github-search-ios/blob/master/resources/code_coverage_70.png">
 
