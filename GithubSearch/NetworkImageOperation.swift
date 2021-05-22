@@ -11,6 +11,10 @@ import UIKit
 final class NetworkImageOperation: AsyncOperation {
     var image: UIImage?
 
+    // Callback which will be run *on the main thread*
+    // when the operation completes.
+    var onImageProcessed: ((UIImage?) -> Void)?
+
     private let url: URL
     private let completionHandler: ((Data?, URLResponse?, Error?) -> Void)?
     private var task: URLSessionDataTask?
@@ -52,6 +56,12 @@ final class NetworkImageOperation: AsyncOperation {
             }
 
             self.image = UIImage(data: data)
+
+            if let onImageProcessed = self.onImageProcessed {
+                DispatchQueue.main.async { [weak self] in
+                    onImageProcessed(self?.image)
+                }
+            }
         })
 
         task?.resume()

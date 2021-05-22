@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class SearchResultTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
@@ -22,12 +21,12 @@ class SearchResultTableViewCell: UITableViewCell {
     //  - SearchResultNoImageTableViewCell
     @IBOutlet var thumbnailImageView: UIImageView?
 
-    func setupImage(with url: URL?) {
-        thumbnailImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "no_image"))
+    func display(image: UIImage?) {
+        thumbnailImageView?.image = image
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        thumbnailImageView?.sd_setImage(with: nil, placeholderImage: UIImage(named: "no_image"))
+        thumbnailImageView?.image = nil
     }
 }

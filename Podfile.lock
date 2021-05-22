@@ -3,26 +3,20 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - ReachabilitySwift (4.3.1)
-  - SDWebImage (5.8.4):
-    - SDWebImage/Core (= 5.8.4)
-  - SDWebImage/Core (5.8.4)
 
 DEPENDENCIES:
   - FMDB
   - ReachabilitySwift (~> 4.0)
-  - SDWebImage
 
 SPEC REPOS:
   trunk:
     - FMDB
     - ReachabilitySwift
-    - SDWebImage
 
 SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
 
-PODFILE CHECKSUM: 41bcfcaaa5377e4e39d81cc34fd7940758b1c94c
+PODFILE CHECKSUM: 3ccbf0fafa40e2a71cceaabe836c134b2afc5986
 
 COCOAPODS: 1.9.3

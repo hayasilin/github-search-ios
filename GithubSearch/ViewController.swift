@@ -58,6 +58,11 @@ class ViewController: UIViewController {
 
     lazy var viewModel = ViewModel()
 
+    private let queue = OperationQueue()
+    private var operations: [IndexPath: Operation] = [:]
+
+    private let imageCache = NSCache<NSURL, UIImage>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         definesPresentationContext = true
@@ -118,7 +123,31 @@ extension ViewController: UITableViewDataSource {
         cell.detailLabel.attributedText = viewModel.detailText(of: repository)
         cell.contentProviderLabel.text = viewModel.contentProvider(of: repository)
         cell.dateLabel.text = viewModel.dateString(of: repository)
-        cell.setupImage(with: thumbnailURL)
+
+        if let url = thumbnailURL {
+            // If the image is in cache, use it
+            if let image = imageCache.object(forKey: url as NSURL) {
+                cell.display(image: image)
+                return cell
+            }
+
+            let networkImageOperation = NetworkImageOperation(url: url)
+            networkImageOperation.onImageProcessed = { image in
+                if let image = image {
+                    cell.display(image: image)
+                    self.imageCache.setObject(image, forKey: url as NSURL)
+                }
+            }
+
+            queue.addOperation(networkImageOperation)
+
+            if let existingOperation = operations[indexPath] {
+                existingOperation.cancel()
+            }
+
+            operations[indexPath] = networkImageOperation
+        }
+
         return cell
     }
 }

@@ -6,7 +6,7 @@ target 'GithubSearch' do
   use_frameworks!
 
   # Pods for GithubSearch
-  pod 'SDWebImage'
+  # pod 'SDWebImage'
   pod 'ReachabilitySwift', '~> 4.0'
   pod 'FMDB'
 
