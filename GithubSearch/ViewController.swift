@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 160
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
         tableView.register(
             UINib(nibName: Constants.imageCell, bundle: nil),
             forCellReuseIdentifier: Constants.imageCell
@@ -144,7 +145,7 @@ extension ViewController: UISearchResultsUpdating {
             return
         }
 
-        viewModel.request(searchTerm)
+        viewModel.search(searchTerm)
     }
 }
 

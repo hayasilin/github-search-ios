@@ -19,6 +19,7 @@ enum GithubAPIEndpoint {
 enum GithubAPIError: Error {
     case badRequest(message: String?)
     case notAuthorized(message: String?)
+    case rateLimitExceeded(message: String?)
     case wrongVersion(message: String?)
     case internalServerError(message: String?)
     case maintenance(message: String?)
@@ -35,6 +36,8 @@ enum GithubAPIError: Error {
             return .badRequest(message: message)
         case 401:
             return .notAuthorized(message: message)
+        case 403:
+            return .rateLimitExceeded(message: message)
         case 409:
             return .wrongVersion(message: message)
         case 500:

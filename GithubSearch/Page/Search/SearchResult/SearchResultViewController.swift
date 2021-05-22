@@ -32,7 +32,7 @@ class SearchResultViewController: UIViewController, LoadingIndicatorDisplayable 
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 160
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(

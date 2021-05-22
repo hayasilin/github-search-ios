@@ -27,12 +27,31 @@ class ViewModel {
 
     private var searchTerm = ""
 
+    private(set) var searchTermThrottle = Throttler<String>(1.5)
+
+    init() {
+        binding()
+    }
+
+    func binding() {
+        searchTermThrottle.on { [weak self] searchTerm in
+            guard let self = self else {
+                return
+            }
+            self.request(searchTerm)
+        }
+    }
+
     func numberOfSections() -> Int {
         return 1
     }
 
     func numberOfRows(inSection section: Int) -> Int {
         return repositoryItems.count
+    }
+
+    func search(_ searchTerm: String) {
+        searchTermThrottle.receive(searchTerm)
     }
 
     func request(_ searchTerm: String) {

@@ -85,6 +85,7 @@
 		659FFA93264F86890063B962 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FFA92264F86890063B962 /* UIColorExtension.swift */; };
 		659FFA95264F99690063B962 /* GithubRepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FFA94264F99690063B962 /* GithubRepositoryResponse.swift */; };
 		659FFA98264F9FF50063B962 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FFA97264F9FF50063B962 /* ArrayExtension.swift */; };
+		65D7A9E1265895130017BA95 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7A9E0265895130017BA95 /* Throttler.swift */; };
 		65FC120D265755BC004D233B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC120C265755BC004D233B /* ViewModel.swift */; };
 		7E7928B666ECF2F572D43EDD /* Pods_GithubSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB52539B59BBA9DDB66DD50 /* Pods_GithubSearch.framework */; };
 		FD9E18E65578CA371F12E97B /* Pods_GithubSearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75A65DD27DA0F5A276EBB53 /* Pods_GithubSearchTests.framework */; };
@@ -192,6 +193,7 @@
 		659FFA92264F86890063B962 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		659FFA94264F99690063B962 /* GithubRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepositoryResponse.swift; sourceTree = "<group>"; };
 		659FFA97264F9FF50063B962 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		65D7A9E0265895130017BA95 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		65FC120C265755BC004D233B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		678C7841123DD47258F120D8 /* Pods-GithubSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch.debug.xcconfig"; path = "Target Support Files/Pods-GithubSearch/Pods-GithubSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		6EE223E0D6ECB6DF570B5260 /* Pods-GithubSearch-GithubSearchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch-GithubSearchUITests.debug.xcconfig"; path = "Target Support Files/Pods-GithubSearch-GithubSearchUITests/Pods-GithubSearch-GithubSearchUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				6501DCEE264FC8ED00ACD78D /* Model */,
 				659FFA60264F69090063B962 /* Page */,
 				659FFA79264F829B0063B962 /* Tools */,
+				65D7A9E0265895130017BA95 /* Throttler.swift */,
 			);
 			path = GithubSearch;
 			sourceTree = "<group>";
@@ -796,6 +799,7 @@
 				659FFA66264F6B6D0063B962 /* UIView+AutoLayout.swift in Sources */,
 				659FFA54264F61AD0063B962 /* SearchResultViewModel.swift in Sources */,
 				6501DCFA264FCFFF00ACD78D /* DBManager.swift in Sources */,
+				65D7A9E1265895130017BA95 /* Throttler.swift in Sources */,
 				659FFA72264F7E280063B962 /* ApiClient.swift in Sources */,
 				6501DD02264FD4CF00ACD78D /* EmptyDisplayable.swift in Sources */,
 				6501DCF6264FCF9200ACD78D /* SearchTermViewModel.swift in Sources */,
