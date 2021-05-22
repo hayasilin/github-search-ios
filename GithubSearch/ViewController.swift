@@ -60,6 +60,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        definesPresentationContext = true
 
         navigationItem.rightBarButtonItems = [searchBarButtonItem]
 
@@ -124,6 +125,7 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchController.searchBar.resignFirstResponder()
         tableView.deselectRow(at: indexPath, animated: true)
 
         if let url = viewModel.repositoryURL(at: indexPath) {

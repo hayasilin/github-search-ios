@@ -87,6 +87,8 @@
 		659FFA98264F9FF50063B962 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FFA97264F9FF50063B962 /* ArrayExtension.swift */; };
 		65D7A9E1265895130017BA95 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7A9E0265895130017BA95 /* Throttler.swift */; };
 		65D7A9E326589F500017BA95 /* ThrottleDebouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7A9E226589F500017BA95 /* ThrottleDebouncer.swift */; };
+		65D7A9E52658A4510017BA95 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7A9E42658A4510017BA95 /* MainPage.swift */; };
+		65D7A9E72658A5D10017BA95 /* MainPageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D7A9E62658A5D10017BA95 /* MainPageTests.swift */; };
 		65FC120D265755BC004D233B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC120C265755BC004D233B /* ViewModel.swift */; };
 		7E7928B666ECF2F572D43EDD /* Pods_GithubSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB52539B59BBA9DDB66DD50 /* Pods_GithubSearch.framework */; };
 		FD9E18E65578CA371F12E97B /* Pods_GithubSearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75A65DD27DA0F5A276EBB53 /* Pods_GithubSearchTests.framework */; };
@@ -196,6 +198,8 @@
 		659FFA97264F9FF50063B962 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		65D7A9E0265895130017BA95 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		65D7A9E226589F500017BA95 /* ThrottleDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleDebouncer.swift; sourceTree = "<group>"; };
+		65D7A9E42658A4510017BA95 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
+		65D7A9E62658A5D10017BA95 /* MainPageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageTests.swift; sourceTree = "<group>"; };
 		65FC120C265755BC004D233B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		678C7841123DD47258F120D8 /* Pods-GithubSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch.debug.xcconfig"; path = "Target Support Files/Pods-GithubSearch/Pods-GithubSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		6EE223E0D6ECB6DF570B5260 /* Pods-GithubSearch-GithubSearchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch-GithubSearchUITests.debug.xcconfig"; path = "Target Support Files/Pods-GithubSearch-GithubSearchUITests/Pods-GithubSearch-GithubSearchUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 		6501DD41265010A000ACD78D /* TestSuites */ = {
 			isa = PBXGroup;
 			children = (
+				65D7A9E62658A5D10017BA95 /* MainPageTests.swift */,
 				6501DD3A26500C7600ACD78D /* SearchPageTests.swift */,
 			);
 			path = TestSuites;
@@ -342,6 +347,7 @@
 		6501DD42265010A800ACD78D /* PageObject */ = {
 			isa = PBXGroup;
 			children = (
+				65D7A9E42658A4510017BA95 /* MainPage.swift */,
 				6501DD3E26500E2600ACD78D /* SearchPage.swift */,
 			);
 			path = PageObject;
@@ -868,8 +874,10 @@
 				6501DD29265007E900ACD78D /* Utility.swift in Sources */,
 				6501DD302650087600ACD78D /* UITestConfig.swift in Sources */,
 				6501DD3F26500E2600ACD78D /* SearchPage.swift in Sources */,
+				65D7A9E72658A5D10017BA95 /* MainPageTests.swift in Sources */,
 				6501DD3B26500C7600ACD78D /* SearchPageTests.swift in Sources */,
 				659FFA29264EB0C30063B962 /* GithubSearchUITests.swift in Sources */,
+				65D7A9E52658A4510017BA95 /* MainPage.swift in Sources */,
 				6501DD3D26500D7100ACD78D /* UITestIdentifierConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

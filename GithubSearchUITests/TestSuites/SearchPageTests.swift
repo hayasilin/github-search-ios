@@ -10,6 +10,7 @@ import XCTest
 class SearchPageTests: XCTestCase {
     let app = XCUIApplication()
 
+    var mainPage: MainPage?
     var searchPage: SearchPage?
 
     private let validSearchText = "Swift"
@@ -20,14 +21,16 @@ class SearchPageTests: XCTestCase {
 
         app.launch()
 
+        mainPage = MainPage(app: app)
         searchPage = SearchPage(app: app)
     }
 
     func testSearchResultDisplay() {
         // Given
-        searchPage?.typeSearchText(searchText: validSearchText)
+        mainPage?.navigateToSearchPage()
 
         // When
+        searchPage?.typeSearchText(searchText: validSearchText)
         searchPage?.searchButton.tap()
 
         // Then
@@ -39,9 +42,10 @@ class SearchPageTests: XCTestCase {
 
     func testSearchResultClickContent() {
         // Given
-        searchPage?.typeSearchText(searchText: validSearchText)
+        mainPage?.navigateToSearchPage()
 
         // When
+        searchPage?.typeSearchText(searchText: validSearchText)
         searchPage?.searchButton.tap()
         let resultCell = app.tables[UITestIdentifierConfig.searchResultTableView.rawValue].cells.firstMatch
         Utility.expect(element: resultCell, status: .exist)
