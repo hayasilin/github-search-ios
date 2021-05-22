@@ -388,6 +388,8 @@
 				659FFA06264EB0C00063B962 /* AppDelegate.swift */,
 				659FFA63264F6AE70063B962 /* Displayable.swift */,
 				659FFA08264EB0C00063B962 /* SceneDelegate.swift */,
+				65D7A9E226589F500017BA95 /* ThrottleDebouncer.swift */,
+				65D7A9E0265895130017BA95 /* Throttler.swift */,
 				659FFA0A264EB0C00063B962 /* ViewController.swift */,
 				65FC120C265755BC004D233B /* ViewModel.swift */,
 				659FFA0F264EB0C30063B962 /* Assets.xcassets */,
@@ -397,13 +399,9 @@
 				659FFA0C264EB0C00063B962 /* Main.storyboard */,
 				659FFA7A264F82E10063B962 /* Manager */,
 				6501DCEE264FC8ED00ACD78D /* Model */,
+				65D7A9EE2658C0270017BA95 /* NetworkImage */,
 				659FFA60264F69090063B962 /* Page */,
 				659FFA79264F829B0063B962 /* Tools */,
-				65D7A9E0265895130017BA95 /* Throttler.swift */,
-				65D7A9E226589F500017BA95 /* ThrottleDebouncer.swift */,
-				65D7A9E82658AF5B0017BA95 /* AsyncOperation.swift */,
-				65D7A9EA2658B05B0017BA95 /* ImageDataProvider.swift */,
-				65D7A9EC2658B0900017BA95 /* NetworkImageOperation.swift */,
 			);
 			path = GithubSearch;
 			sourceTree = "<group>";
@@ -545,6 +543,16 @@
 				659FFA8A264F84980063B962 /* UITableViewExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		65D7A9EE2658C0270017BA95 /* NetworkImage */ = {
+			isa = PBXGroup;
+			children = (
+				65D7A9E82658AF5B0017BA95 /* AsyncOperation.swift */,
+				65D7A9EA2658B05B0017BA95 /* ImageDataProvider.swift */,
+				65D7A9EC2658B0900017BA95 /* NetworkImageOperation.swift */,
+			);
+			path = NetworkImage;
 			sourceTree = "<group>";
 		};
 		E1CD38FDF5F82E4AFB6F368A /* Frameworks */ = {
