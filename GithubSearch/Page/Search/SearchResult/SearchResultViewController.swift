@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchResultViewControllerDelegate: AnyObject {
-    func viewControllerDidSelectRepository(_ vc: SearchResultViewController, articleLink link: URL)
+    func viewControllerDidSelectRepository(_ vc: SearchResultViewController, repositoryLink link: URL)
 }
 
 class SearchResultViewController: UIViewController, LoadingIndicatorDisplayable {
@@ -168,7 +168,7 @@ extension SearchResultViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         if let url = viewModel.repositoryURL(at: indexPath) {
-            delegate?.viewControllerDidSelectRepository(self, articleLink: url)
+            delegate?.viewControllerDidSelectRepository(self, repositoryLink: url)
         }
     }
 

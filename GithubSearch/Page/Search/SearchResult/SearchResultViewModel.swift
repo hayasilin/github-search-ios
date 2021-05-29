@@ -80,7 +80,7 @@ class SearchResultViewModel {
 
         GithubSearchRepositoriesAPI(requestParameter: requestParameter).request { response in
             self.dataMaxCount = response.totalCount
-            self.convertAttributedStrings(articles: response.items)
+            self.convertAttributedStrings(repositoryItems: response.items)
             self.repositoryItems = response.items
             self.searchResultRepositoryListDidChange?()
         } failure: { error in
@@ -124,7 +124,7 @@ class SearchResultViewModel {
         GithubSearchRepositoriesAPI(requestParameter: requestParameter).request { response in
             self.isLoading = false
             self.dataMaxCount = response.totalCount
-            self.convertAttributedStrings(articles: response.items)
+            self.convertAttributedStrings(repositoryItems: response.items)
             self.repositoryItems.append(contentsOf: response.items)
             self.searchResultRepositoryListDidChange?()
         } failure: { error in
@@ -150,8 +150,8 @@ class SearchResultViewModel {
         dataMaxCount = nil
     }
 
-    private func convertAttributedStrings(articles: [GithubRepositoryItem]) {
-        articles.forEach {
+    private func convertAttributedStrings(repositoryItems: [GithubRepositoryItem]) {
+        repositoryItems.forEach {
             if let name = $0.name, let description = $0.descriptionField {
                 self.titleDict[name] = try? name.htmlAttributedString(fontSize: 14, r: 0, g: 0, b: 0)
                 self.detailDict[description] = try? description.htmlAttributedString(fontSize: 14, r: 134, g: 134, b: 134)

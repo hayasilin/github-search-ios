@@ -123,7 +123,7 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: SearchResultViewControllerDelegate {
-    func viewControllerDidSelectRepository(_ vc: SearchResultViewController, articleLink link: URL) {
+    func viewControllerDidSelectRepository(_ vc: SearchResultViewController, repositoryLink link: URL) {
         coordinator?.searchViewController(self, didSelectRepository: link)
     }
 }
