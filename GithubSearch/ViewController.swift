@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, Displayable {
     fileprivate enum Constants {
         static let noImageCell = "SearchResultNoImageTableViewCell"
         static let imageCell = "SearchResultWithImageTableViewCell"
@@ -31,16 +31,6 @@ class ViewController: UIViewController {
         return tableView
     }()
 
-    lazy var searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "Input search keyword"
-        searchController.searchBar.sizeToFit()
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
-        return searchController
-    }()
-
     lazy var searchButton: UIButton = {
         let searchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         searchButton.setImage(UIImage(named: "icSearch"), for: .normal)
@@ -54,6 +44,24 @@ class ViewController: UIViewController {
         return searchBarButtonItem
     }()
 
+    lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = .minimal
+        searchBar.placeholder = "Input search keyword"
+        return searchBar
+    }()
+
+    lazy var cancelBarButtonItem: UIBarButtonItem = {
+        let cancelBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(cancelButtonTapped)
+        )
+        return cancelBarButtonItem
+    }()
+
+    var searchTermViewController: SearchTermViewController?
+
     var searchCoordinator: SearchCoordinator?
 
     lazy var viewModel = ViewModel()
@@ -63,18 +71,21 @@ class ViewController: UIViewController {
 
     private let imageCache = NSCache<NSURL, UIImage>()
 
+    var maxSearchTermLength: Int {
+        return viewModel.maxSearchTermLength()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         definesPresentationContext = true
 
-        navigationItem.rightBarButtonItems = [searchBarButtonItem]
-
-        view.addSubview(tableView)
-        tableView.pinEdgesToSuperviewEdges()
-
-        tableView.tableHeaderView = searchController.searchBar
+        navigationItem.rightBarButtonItems = [cancelBarButtonItem, searchBarButtonItem]
 
         binding()
+
+        configureSearchBar()
+        configureSearchTermPage()
+        configureSearchResultTableView()
     }
 
     private func binding() {
@@ -83,6 +94,45 @@ class ViewController: UIViewController {
                 self?.tableView.reloadData()
             }
         }
+    }
+
+    func configureSearchBar() {
+        navigationItem.titleView = searchBar
+        searchBar.delegate = self
+    }
+
+    func configureSearchTermPage() {
+        remove(searchTermViewController)
+        let searchTermVC = SearchTermViewController()
+        searchTermVC.userDidClick = { [weak self] searchTerm in
+            guard let self = self else { return }
+            self.searchBar.text = searchTerm
+            self.viewModel.search(searchTerm)
+            self.remove(self.searchTermViewController)
+        }
+        display(searchTermVC, under: self)
+        searchTermVC.view.pinEdgesToSuperviewEdges()
+        searchTermViewController = searchTermVC
+    }
+
+    func configureSearchResultTableView() {
+        view.addSubview(tableView)
+        tableView.pinEdgesToSuperviewEdges()
+    }
+
+    func search(searchTerm: String) {
+        guard searchTerm != "" else {
+            return
+        }
+
+        remove(searchTermViewController)
+        viewModel.search(searchTerm)
+    }
+
+    @objc func cancelButtonTapped() {
+        searchBar.resignFirstResponder()
+
+        configureSearchTermPage()
     }
 
     @objc func searchButtonTapped(_ sender: UIButton) {
@@ -154,7 +204,7 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchController.searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
         tableView.deselectRow(at: indexPath, animated: true)
 
         if let url = viewModel.repositoryURL(at: indexPath) {
@@ -169,24 +219,24 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-extension ViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchTerm = searchController.searchBar.text,
-              searchTerm != "" else {
-            return
+extension ViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count > maxSearchTermLength {
+            searchBar.text = searchText.subString(at: NSRange(location: 0, length: maxSearchTermLength))
         }
 
-        viewModel.search(searchTerm)
+        if !searchText.isEmpty {
+            search(searchTerm: searchText)
+        }
     }
-}
 
-extension ViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-    }
 
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+        // Save to recent search text
+        if let searchTerm = searchBar.text {
+            searchTermViewController?.add(searchTerm: searchTerm)
+        }
     }
 }
 

@@ -42,6 +42,10 @@ class ViewModel {
         }
     }
 
+    func maxSearchTermLength() -> Int {
+        return 500
+    }
+
     func numberOfSections() -> Int {
         return 1
     }
