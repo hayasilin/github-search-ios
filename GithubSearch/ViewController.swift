@@ -75,6 +75,10 @@ class ViewController: UIViewController, Displayable {
         return viewModel.maxSearchTermLength()
     }
 
+    deinit {
+        print("deinit")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         definesPresentationContext = true
@@ -182,10 +186,10 @@ extension ViewController: UITableViewDataSource {
             }
 
             let networkImageOperation = NetworkImageOperation(url: url)
-            networkImageOperation.onImageProcessed = { image in
+            networkImageOperation.onImageProcessed = { [weak self] image in
                 if let image = image {
                     cell.display(image: image)
-                    self.imageCache.setObject(image, forKey: url as NSURL)
+                    self?.imageCache.setObject(image, forKey: url as NSURL)
                 }
             }
 
