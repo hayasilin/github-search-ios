@@ -9,12 +9,21 @@ import Foundation
 import Reachability
 
 struct ReachabilityManager {
-    static let reachability = Reachability()
     static func networkReachable() -> Bool {
-        guard let reachability = reachability else {
+        guard let reachability = Reachability() else {
             // no reachability lib, treat as network reachable
             return true
         }
+
+        switch reachability.connection {
+        case .wifi:
+            Logger.log("Reachable via WiFi", level: .info)
+        case .cellular:
+            Logger.log("Reachable via Cellular", level: .info)
+        case .none:
+            Logger.log("Network not reachable", level: .info)
+        }
+
         return reachability.connection != .none
     }
 }
