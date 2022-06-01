@@ -1,9 +1,9 @@
 # github-search-ios
 
 - An iOS app project of using GitHub API which implements:
-  - Implement incremental search.
-  - Use pure URLSession to fulfill API request.
-  - Implement API request throttling.
+  - Incremental search.
+  - Pure URLSession to fulfill API request.
+  - API request throttling.
   - Use NSOperation to handle network image downloading without using third party libraries.
 
 - Githu API used by the project:
